@@ -38,7 +38,7 @@ if test -n "$missing_copyright_year" ; then
 		echo "    $f"
 		done
 	echo "Commit aborted."
-	exit 1
+	#exit 1
 	fi
 
 #-------------------------------------------------------------------------------
