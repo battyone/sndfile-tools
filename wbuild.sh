@@ -9,5 +9,6 @@ gcc src/spectrogram.c src/spectrum.c src/window.c src/common.c -Ilibsndfile/incl
 
 #gcc -DCUFFTW src/spectrogram.c src/spectrum.c src/window.c src/common.c -Ilibsndfile/include -I"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.1/include" -Icairo/include -L"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.1/lib/x64" -lcuda -Llibsndfile/lib -llibsndfile-1 -Lcairo/lib/x64 -lcairo -o spectrogram.exe -O3
 
-
 mv spectrogram.exe bin/
+
+# thanks to https://github.com/preshing/cairo-windows/releases for building the Cairo library on Windows
