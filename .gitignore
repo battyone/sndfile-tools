@@ -38,3 +38,4 @@ src/sndfile-pitch-infer
 src/stamp-h1
 *.log
 *.trs
+bin/*.dll
