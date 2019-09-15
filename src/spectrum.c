@@ -4,7 +4,11 @@
 #include <math.h>
 #include <limits.h>
 
-#include <fftw3.h>
+#ifdef CUFFTW
+	#include <cufftw.h>
+#else
+	#include <fftw3.h>
+#endif
 
 #include <sndfile.h>
 
