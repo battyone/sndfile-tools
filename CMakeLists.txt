@@ -23,7 +23,7 @@ else()
     if(APPLE)
         # since Mojave, cmake no longer finds these automatically:
         # (see https://stackoverflow.com/questions/54068035/linking-not-working-in-homebrews-cmake-since-mojave)
-        include_directories(/usr/local/include)
+        include_directories(/usr/local/include /usr/local/include/cairo)
         #link_directories(/usr/local/lib)
     endif()
 
