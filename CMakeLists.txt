@@ -8,6 +8,9 @@ add_executable(sndfile-spectrogram src/spectrogram.c src/spectrum.c src/window.c
 add_executable(sndfile-mix-to-mono src/mix-to-mono.c src/common.c)
 #add_executable(sndfile-jackplay src/jackplay.c)
 
+
+
+
 # find libraries (PITA on Windows ...)
 if(WIN32)
     find_library(SNDFILE_LIBRARY NAMES libsndfile-1 libsndfile HINTS ${PROJECT_SOURCE_DIR}/libsndfile/lib)
@@ -16,9 +19,17 @@ if(WIN32)
     find_library(CAIRO_LIBRARY NAMES cairo HINTS ${PROJECT_SOURCE_DIR}/cairo/lib/x64)
     include_directories(libsndfile/include fftw64 cairo/include)
 else()
-    find_library(SNDFILE_LIBRARY NAMES libsndfile-1)
-    find_library(FFTW_LIBRARY NAMES libfftw3-3)
-    find_library(CAIRO_LIBRARY NAMES libcairo)
+
+    if(APPLE)
+        # since Mojave, cmake no longer finds these automatically:
+        # (see https://stackoverflow.com/questions/54068035/linking-not-working-in-homebrews-cmake-since-mojave)
+        include_directories(/usr/local/include)
+        #link_directories(/usr/local/lib)
+    endif()
+
+    find_library(SNDFILE_LIBRARY NAMES sndfile)
+    find_library(FFTW_LIBRARY NAMES fftw3)
+    find_library(CAIRO_LIBRARY NAMES cairo)
 endif()
 
 # common
