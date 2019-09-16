@@ -6,7 +6,13 @@ typedef struct
 
 	double *time_domain ;
 	double *window ;
+
+#ifdef CUFFTW
+	fftw_complex *freq_domain ;
+#else
 	double *freq_domain ;
+#endif
+
 	double *mag_spec ;
 
 	double data [] ;

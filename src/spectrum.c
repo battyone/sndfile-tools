@@ -37,7 +37,14 @@ create_spectrum (int speclen, enum WINDOW_FUNCTION window_function)
 	*/
 	spec->time_domain = calloc (2 * speclen + 1, sizeof (double)) ;
 	spec->window = calloc (2 * speclen, sizeof (double)) ;
+
+#ifdef CUFFT
+	spec->freq_domain = calloc (2 * speclen, sizeof (fftw_complex)) ;
+#else
 	spec->freq_domain = calloc (2 * speclen, sizeof (double)) ;
+#endif
+
+	
 	spec->mag_spec = calloc (speclen + 1, sizeof (double)) ;
 	if (spec->time_domain == NULL
 		|| spec->window == NULL
@@ -47,7 +54,12 @@ create_spectrum (int speclen, enum WINDOW_FUNCTION window_function)
 		exit (1) ;
 		} ;
 
+#ifdef CUFFT
+	spec->plan = fftw_plan_dft_r2c_1d (2 * speclen, spec->time_domain, spec->freq_domain, FFTW_MEASURE | FFTW_PRESERVE_INPUT) ;
+#else
 	spec->plan = fftw_plan_r2r_1d (2 * speclen, spec->time_domain, spec->freq_domain, FFTW_R2HC, FFTW_MEASURE | FFTW_PRESERVE_INPUT) ;
+#endif
+
 	if (spec->plan == NULL)
 	{	printf ("%s:%d : fftw create plan failed.\n", __func__, __LINE__) ;
 		free (spec) ;
