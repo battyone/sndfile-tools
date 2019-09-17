@@ -1,4 +1,3 @@
-
 typedef struct
 {	int speclen ;
 	enum WINDOW_FUNCTION wfunc ;
